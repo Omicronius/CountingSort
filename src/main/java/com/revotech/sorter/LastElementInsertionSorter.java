@@ -13,7 +13,7 @@ public class LastElementInsertionSorter {
 
     public static void insertionSort() {
         initialization();
-        StringBuilder sortingReport = new StringBuilder("");
+        StringBuilder sortingReport = new StringBuilder();
         int[] unsortedArray = Arrays.stream(lineOfElements.split(" ")).mapToInt(Integer::parseInt).toArray();
         int unsortedElement = unsortedArray[arraySize - 1];
         int i = arraySize - 1;
@@ -28,7 +28,7 @@ public class LastElementInsertionSorter {
     }
 
     private static StringBuilder arrayToString(int[] arr) {
-        StringBuilder result = new StringBuilder("");
+        StringBuilder result = new StringBuilder();
         for (int element : arr) {
             result.append(element + " ");
         }
