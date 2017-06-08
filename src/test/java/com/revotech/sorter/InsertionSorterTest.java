@@ -18,13 +18,15 @@ public class InsertionSorterTest {
     public void sort() throws Exception {
         int [] unsorted = {2, 4, 6, 8, 3};
         int [] sorted = {2, 3, 4, 6, 8};
-        Assert.assertTrue(Arrays.equals(sorter.sort(unsorted), sorted));
+        //sorter.insertionSort(unsorted);
+        Assert.assertTrue(Arrays.equals(unsorted, sorted));
     }
 
     @Test
     public void firstElementInsertion() throws Exception {
         int [] unsorted = {2, 4, 6, 8, 1};
         int [] sorted = {1, 2, 4, 6, 8};
-        Assert.assertTrue(Arrays.equals(sorter.sort(unsorted), sorted));
+        //sorter.insertionSort(unsorted);
+        Assert.assertTrue(Arrays.equals(unsorted, sorted));
     }
 }
