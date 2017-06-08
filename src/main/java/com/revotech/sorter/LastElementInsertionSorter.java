@@ -2,52 +2,49 @@ package com.revotech.sorter;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class LastElementInsertionSorter {
     private static Scanner scanner;
-    private static int size;
+    private static String pathToFile = "input.txt";
+    private static int arraySize;
     private static String lineOfElements;
 
     public static void insertionSort() {
-        readInput();
-        String[] elements = lineOfElements.split(" ");
-        int[] unsortedArray = new int[size];
-        for (int i = 0; i < size; i++) {
-            unsortedArray[i] = Integer.parseInt(elements[i]);
-        }
-        int unsortedElement = unsortedArray[size - 1];
-        int i = size - 1;
+        initialization();
+        StringBuilder sortingReport = new StringBuilder("");
+        int[] unsortedArray = Arrays.stream(lineOfElements.split(" ")).mapToInt(Integer::parseInt).toArray();
+        int unsortedElement = unsortedArray[arraySize - 1];
+        int i = arraySize - 1;
         while (i > 0 && unsortedElement < unsortedArray[i - 1]) {
-                unsortedArray[i] = unsortedArray[i - 1];
-                printArray(unsortedArray);
-                i--;
+            unsortedArray[i] = unsortedArray[i - 1];
+            sortingReport.append(arrayToString(unsortedArray));
+            i--;
         }
         unsortedArray[i] = unsortedElement;
-        printArray(unsortedArray);
+        sortingReport.append(arrayToString(unsortedArray));
+        System.out.println(sortingReport);
     }
 
-    private static void printArray(int[] arr) {
-        String output = "";
+    private static StringBuilder arrayToString(int[] arr) {
+        StringBuilder result = new StringBuilder("");
         for (int element : arr) {
-            output += element + " ";
+            result.append(element + " ");
         }
-        output = output.trim() + "\n";
-        System.out.print(output);
+        result.append("\n");
+        return result;
     }
 
-    private static void readInput() {
+    private static void initialization() {
         try {
-            scanner = new Scanner(new File("input.txt"));
+            scanner = new Scanner(new File(pathToFile));
+            arraySize = Integer.parseInt(scanner.nextLine());
+            lineOfElements = scanner.nextLine();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+        } finally {
+            scanner.close();
         }
-        size = Integer.parseInt(scanner.nextLine());
-        lineOfElements = scanner.nextLine();
-        scanner.close();
-    }
-
-    public static void main(String[] args) {
-        insertionSort();
     }
 }
