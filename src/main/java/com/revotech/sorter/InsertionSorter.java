@@ -6,14 +6,19 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class InsertionSorter {
-    private static Scanner scanner;
-    private static String pathToFile = "input.txt";
-    private static int arraySize;
-    private static String lineOfElements;
+    private static final String PATH_TO_FILE = "input.txt";
 
     public static void insertionSort() {
-        initialization();
-        StringBuilder sortingReport = new StringBuilder();
+        int arraySize = 0;
+        String lineOfElements = "";
+
+        try (Scanner scanner = new Scanner(new File(PATH_TO_FILE))) {
+            arraySize = Integer.parseInt(scanner.nextLine());
+            lineOfElements = scanner.nextLine();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
         int[] unsortedArray = Arrays.stream(lineOfElements.split(" ")).mapToInt(Integer::parseInt).toArray();
         int outerIndex = 1;
         int innerIndex;
@@ -27,18 +32,6 @@ public class InsertionSorter {
             }
             outerIndex++;
             System.out.println(arrayToString(unsortedArray));
-        }
-    }
-
-    private static void initialization() {
-        try {
-            scanner = new Scanner(new File(pathToFile));
-            arraySize = Integer.parseInt(scanner.nextLine());
-            lineOfElements = scanner.nextLine();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } finally {
-            scanner.close();
         }
     }
 
