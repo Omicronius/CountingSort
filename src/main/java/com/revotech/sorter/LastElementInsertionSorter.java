@@ -15,25 +15,19 @@ public class LastElementInsertionSorter {
         initialization();
         StringBuilder sortingReport = new StringBuilder();
         int[] unsortedArray = Arrays.stream(lineOfElements.split(" ")).mapToInt(Integer::parseInt).toArray();
-        int unsortedElement = unsortedArray[arraySize - 1];
-        int i = arraySize - 1;
-        while (i > 0 && unsortedElement < unsortedArray[i - 1]) {
-            unsortedArray[i] = unsortedArray[i - 1];
-            sortingReport.append(arrayToString(unsortedArray));
-            i--;
+        int outerIndex = 1;
+        int innerIndex;
+        while (outerIndex < arraySize) {
+            innerIndex = outerIndex;
+            while (innerIndex > 0 && unsortedArray[innerIndex] < unsortedArray[innerIndex - 1]) {
+                int temp = unsortedArray[innerIndex];
+                unsortedArray[innerIndex] = unsortedArray[innerIndex - 1];
+                unsortedArray[innerIndex - 1] = temp;
+                innerIndex--;
+            }
+            outerIndex++;
+            System.out.println(arrayToString(unsortedArray));
         }
-        unsortedArray[i] = unsortedElement;
-        sortingReport.append(arrayToString(unsortedArray));
-        System.out.println(sortingReport);
-    }
-
-    private static StringBuilder arrayToString(int[] arr) {
-        StringBuilder result = new StringBuilder();
-        for (int element : arr) {
-            result.append(element + " ");
-        }
-        result.append("\n");
-        return result;
     }
 
     private static void initialization() {
@@ -46,5 +40,13 @@ public class LastElementInsertionSorter {
         } finally {
             scanner.close();
         }
+    }
+
+    private static StringBuilder arrayToString(int[] arr) {
+        StringBuilder result = new StringBuilder();
+        for (int element : arr) {
+            result.append(element).append(" ");
+        }
+        return result;
     }
 }
