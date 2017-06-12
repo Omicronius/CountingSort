@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class LastElementInsertionSorter {
+public class InsertionSorter {
     private static Scanner scanner;
     private static String pathToFile = "input.txt";
     private static int arraySize;
